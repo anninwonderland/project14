@@ -78,15 +78,22 @@ class GameScene: SKScene {
     func createEnemy() {
         numRounds += 1
         
-        if numRounds >= 30 {
+        if numRounds >= 10 {
             for slot in slots {
                 slot.hide()
             }
+            
+            run(SKAction.playSoundFileNamed("gameOver.mp3", waitForCompletion: false))
             
             let gameOver = SKSpriteNode(imageNamed: "gameOver")
             gameOver.position = CGPoint(x: 512, y: 384)
             gameOver.zPosition = 1
             addChild(gameOver)
+            
+            let finalScore = SKLabelNode(text: "Your score is \(score)")
+            finalScore.position = CGPoint(x: 512, y: 224)
+            finalScore.zPosition = 1
+            addChild(finalScore)
             return
         }
         popupTime *= 0.991
